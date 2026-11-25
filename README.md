@@ -17,8 +17,8 @@ Pengembangan proyek Ujian Tengah Semester (UTS) Pemrograman Berorientasi Objek (
 ```text
 logistik-exception/
 ├── README.md
-├── commit_awal/
-│   └── logistik_uts.py      # Kode asli UTS sebelum penambahan exception handling
+├── docs/
+│   └── class-diagram (1).png     #revisi class diagram
 └── src/
     ├── exceptions.py        # Hierarki custom exception aplikasi
     ├── kurir.py             # Class Kurir (abstrak), KurirMotor, KurirMobil
@@ -60,93 +60,4 @@ Berikut aturan bisnis pada sistem logistik pengiriman paket beserta *custom exce
 
 Diagram berikut menambahkan hierarki `LogistikError` beserta *subclass*-nya (`«exception»`) dan menunjukkan kelas/method domain yang memunculkan exception tersebut:
 
-```mermaid
-classDiagram
-    class Exception {
-        <<built-in>>
-    }
-
-    class LogistikError {
-        <<exception>>
-    }
-
-    class BeratTidakValidError {
-        <<exception>>
-        +nilai : Any
-        +__init__(nilai)
-    }
-
-    class KapasitasTerlampauiError {
-        <<exception>>
-        +kapasitas : float
-        +total : float
-        +kelebihan : float
-        +__init__(kapasitas, total)
-    }
-
-    class TransisiStatusError {
-        <<exception>>
-        +status_sekarang : str
-        +status_baru : str
-        +__init__(status_sekarang, status_baru)
-    }
-
-    class CatatanPenangananTidakValidError {
-        <<exception>>
-        +nilai : Any
-        +__init__(nilai)
-    }
-
-    class DataKurirTidakValidError {
-        <<exception>>
-        +bidang : str
-        +nilai : Any
-        +__init__(bidang, nilai)
-    }
-
-    Exception <|-- LogistikError
-    LogistikError <|-- BeratTidakValidError
-    LogistikError <|-- KapasitasTerlampauiError
-    LogistikError <|-- TransisiStatusError
-    LogistikError <|-- CatatanPenangananTidakValidError
-    LogistikError <|-- DataKurirTidakValidError
-
-    class Paket {
-        #_no_resi : str
-        #_penerima : str
-        #_berat_kg : float
-        +berat_kg {setter}
-        +dari_gram(penerima, gram)
-        +perbarui_status(status_baru)
-    }
-
-    class PaketRapuh {
-        #_catatan_penanganan : str
-        +catatan_penanganan {setter}
-        +biaya_kirim()
-    }
-
-    class Kurir {
-        <<abstract>>
-        #_id_kurir : str
-        #_nama : str
-        #_kapasitas_maks : float
-        +nama {setter}
-        +kapasitas_maks {setter}
-    }
-
-    class Pengiriman {
-        #_kurir : Kurir
-        #_rute : Rute
-        +tambah_paket(alamat, paket)
-        +berangkat()
-        +antar_semua()
-    }
-
-    Paket <|-- PaketRapuh
-    Paket ..> BeratTidakValidError : raises (berat_kg, dari_gram)
-    Paket ..> TransisiStatusError : raises (perbarui_status)
-    PaketRapuh ..> CatatanPenangananTidakValidError : raises (catatan_penanganan)
-    Kurir ..> DataKurirTidakValidError : raises (nama, kapasitas_maks)
-    Pengiriman ..> KapasitasTerlampauiError : raises (tambah_paket)
-```
+![Class Diagram](docs/class-diagram (1).png)~
