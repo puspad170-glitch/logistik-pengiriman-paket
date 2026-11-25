@@ -60,4 +60,4 @@ Berikut aturan bisnis pada sistem logistik pengiriman paket beserta *custom exce
 
 Diagram berikut menambahkan hierarki `LogistikError` beserta *subclass*-nya (`«exception»`) dan menunjukkan kelas/method domain yang memunculkan exception tersebut:
 
-![Class Diagram](docs/class-diagram (1).png)~
+![Class Diagram](docs/class-diagram.png)
